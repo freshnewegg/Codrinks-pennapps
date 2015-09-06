@@ -36,23 +36,24 @@ exports = module.exports = app;
 console.log('MEAN.JS application started on port ' + config.port);
 
 var Uber = require('node-uber');
+var ubercost=0;
 
 var uber = new Uber({
   client_id: 'WqZA5bBnlVOwj5H9A2ondWI3_oa8QMXm',
   client_secret: 'RuooXCT9q1iB53o3HWdlJE3XNuY22u1WqOZlhhjR',
   server_token: 'Y2gCLsgqQB7nyMjduRt1jspsfepAVrU_ibpgr7uh',
   redirect_uri: 'http://localhost:3000/#!/',
-  name: 'Codrinks'
+  name: 'CoDrinks'
 });
 
 uber.estimates.price({ 
-  start_latitude: 3.1357, start_longitude: 101.6880, 
-  end_latitude: 3.0833, end_longitude: 101.6500 
+  start_latitude: 39.950123, start_longitude: -74.8109725, 
+  end_latitude: 39.9012015, end_longitude: -75.1719795 
 }, function (err, res) {
   if (err) console.error(err);
   else{ console.log(res);
-  	console.log(1);
-  	console.log("the price is" + res.prices[1].high_estimate);
-
-  	};
+    console.log(1);
+    console.log("The Uber cost is: " + res.prices[0].high_estimate);
+    ubercost=res.prices[0].high_estimate;
+    };
 });

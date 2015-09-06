@@ -236,6 +236,10 @@ var DragDropContainer = _react2['default'].createClass({
     }
 });
 
+function handlingclick(){
+    window.location.replace("../app/views/paypalview.html");
+}
+
 var DragDropCartRow = _react2['default'].createClass({
     displayName: 'DragDropCartRow',
 
@@ -348,7 +352,7 @@ var DragDropComponent = _react2['default'].createClass({
             show: !!this.state.purchase,
             onHide: this.hideModal }, _react2['default'].createElement(_reactBootstrap.Modal.Header, null, _react2['default'].createElement(_reactBootstrap.Modal.Title, null, 'Your order')), _react2['default'].createElement(_reactBootstrap.Modal.Body, null, this.state.purchase && _react2['default'].createElement('div', null, _react2['default'].createElement(_reactBootstrap.Alert, { bsStyle: 'warning' }, 'This is a demo—orders are not processed. ', _react2['default'].createElement('i', { className: 'fa fa-smile-o' })), _react2['default'].createElement(_reactBootstrap.Table, null, _react2['default'].createElement('tbody', null, this.state.purchase.map(function (item) {
             return _react2['default'].createElement('tr', { key: item._key }, _react2['default'].createElement('td', null, item.data['Artist']), _react2['default'].createElement('td', null, item.data['Title']), _react2['default'].createElement('td', null, '× ', item.quantity));
-        }))), _react2['default'].createElement(_reactBootstrap.Button, { block: true, onClick: this.hideModal }, 'Ok')))), _react2['default'].createElement(_reactBootstrap.Grid, null, _react2['default'].createElement(_griddleReact2['default'], {
+        }))), _react2['default'].createElement(_reactBootstrap.Button, { block: true, onClick: this.handlingclick }, 'Ok')))), _react2['default'].createElement(_reactBootstrap.Grid, null, _react2['default'].createElement(_griddleReact2['default'], {
             showFilter: true,
             columns: ['Artist', 'Title', 'Label', 'Country', 'Year', 'Format', 'Price'],
             useGriddleStyles: false,
@@ -440,48 +444,64 @@ module.exports = GriddleBootstrapPager;
 
 var items = {
    "item-1": {
-      "Brand": "Dos Equis",
-      "Type": "Beer",
+      "Artist": "Tito's",
+      "Title": "Handmake Vodka",
+      "Label": "Steppas Records 01",
+      "Country": "GB",
+      "Year": "2013",
+      "Format": "LP",
       "Price": "11.86",
-      "Quantity": "12",
       "thumbnail": "56L.jpg"
    },
    "item-2": {
-      "Brand": "Bud Light",
-      "Type": "Beer",
-      "Price": "11.86",
-      "Quantity": "24",
+      "Artist": "Grey Goose",
+      "Title": "Vodka",
+      "Label": "Steppas Records 01",
+      "Country": "GB",
+      "Year": "2013",
+      "Format": "LP",
+      "Price": "29.99",
       "thumbnail": "46L.jpg"
    },
    "item-3": {
-      "Brand": "Smirnoff",
-      "Type": "Vodka",
+      "Artist": "Retel One",
+      "Title": "Vodka",
+      "Label": "Steppas Records 01",
+      "Country": "GB",
+      "Year": "2013",
+      "Format": "LP",
       "Price": "19.99",
-      "Quantity": "1",
       "thumbnail": "06L.jpg"
    },
    "item-4": {
-       "Brand": "Miller High Life",
-      "Type": "Beer",
+      "Artist": "Captain Morgans",
+      "Title": "Spiced Rum",
+      "Label": "Steppas Records 01",
+      "Country": "GB",
+      "Year": "2013",
+      "Format": "LP",
       "Price": "12.00",
-      "Quantity": "12",
       "thumbnail": "86L.jpg"
    },
    "item-5": {
-      "Brand": "Dalmore - Cigar Malt",
-      "Type": "Scotch Whisky",
-      "Price": "24.99",
-      "Quantity": "24",
-      "thumbnail": "90L.jpg"
-   },
-   "item-6": {
-      "Artist": "Alpha Steppa & Alpha and Omega Presents",
-      "Title": "The Unrelenting Force of Dub Dynasty",
+      "Artist": "Jim Beam",
+      "Title": "Bourbon",
       "Label": "Steppas Records 01",
       "Country": "GB",
       "Year": "2013",
       "Format": "LP",
       "Price": "16.92",
+      "thumbnail": "90L.jpg"
+   },
+   "item-6": {
+
+      "Artist": "Smirnoff",
+      "Title": "Vodka",
+      "Label": "Steppas Records 01",
+      "Country": "GB",
+      "Year": "2013",
+      "Format": "LP",
+      "Price": "24.99",
       "thumbnail": "31L.jpg"
    },
    "item-7": {

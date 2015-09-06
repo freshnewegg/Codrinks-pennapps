@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>{{title}}</title>
+
+	<script src="https://fb.me/react-0.13.3.js"></script>
+	<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,400,700,900">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/example-drag-drop.css">
+
+	<!-- General META -->
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	<!-- Semantic META -->
+	<meta name="keywords" content="{{keywords}}">
+	<meta name="description" content="{{description}}">
+
+	<!-- Facebook META -->
+	<meta property="fb:app_id" content="{{facebookAppId}}">
+	<meta property="og:site_name" content="{{title}}">
+	<meta property="og:title" content="{{title}}">
+	<meta property="og:description" content="{{description}}">
+	<meta property="og:url" content="{{url}}">
+	<meta property="og:image" content="/img/brand/logo.png">
+	<meta property="og:type" content="website">
+
+	<!-- Twitter META -->
+	<meta name="twitter:title" content="{{title}}">
+	<meta name="twitter:description" content="{{description}}">
+	<meta name="twitter:url" content="{{url}}">
+	<meta name="twitter:image" content="/img/brand/logo.png">
+
+	<!-- Fav Icon -->
+	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+	<!-- HTML5 Shim -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body class="ng-cloak">
+	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
+	<section class="content">
+		<section class="container">
+			{% block content %}{% endblock %}
+		</section>
+	</section>
+	<div id="main">
+	</div>
+	<!--Embedding The User Object-->
+	<script type="text/javascript">
+		var user = {{ user | json | safe }};
+	</script>
+
+	<!--Application JavaScript Files-->
+	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
+
+	{% if process.env.NODE_ENV === 'development' %}
+	<!--Livereload script rendered -->
+	<script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
+	{% endif %}
+
+
+	<!-- BRAINTREE CONTENT -->
+    <form id="checkout" method="post" action="/checkout">
+      <div id="payment-form"></div>
+      <input type="submit" value="Pay">
+    </form>
+
+    <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+    <script>
+    // We generated a client token for you so you can test out this code
+    // immediately. In a production-ready integration, you will need to
+    // generate a client token on your server (see section below).
+    var clientToken = "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJlOTRlODExODEyZjYxOTkyZjJkODQwYzM1MzFjZWFiMTY3MTBmMDk5YTc0NzMyOGQ5YzliNmNlZDEzODNhYjZkfGNyZWF0ZWRfYXQ9MjAxNS0wOS0wNlQwMjozMjoyNi43Nzc3Njk3NjArMDAwMFx1MDAyNm1lcmNoYW50X2lkPTM0OHBrOWNnZjNiZ3l3MmJcdTAwMjZwdWJsaWNfa2V5PTJuMjQ3ZHY4OWJxOXZtcHIiLCJjb25maWdVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvMzQ4cGs5Y2dmM2JneXcyYi9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJjaGFsbGVuZ2VzIjpbXSwiZW52aXJvbm1lbnQiOiJzYW5kYm94IiwiY2xpZW50QXBpVXJsIjoiaHR0cHM6Ly9hcGkuc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbTo0NDMvbWVyY2hhbnRzLzM0OHBrOWNnZjNiZ3l3MmIvY2xpZW50X2FwaSIsImFzc2V0c1VybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXV0aFVybCI6Imh0dHBzOi8vYXV0aC52ZW5tby5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwiYW5hbHl0aWNzIjp7InVybCI6Imh0dHBzOi8vY2xpZW50LWFuYWx5dGljcy5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIn0sInRocmVlRFNlY3VyZUVuYWJsZWQiOnRydWUsInRocmVlRFNlY3VyZSI6eyJsb29rdXBVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvMzQ4cGs5Y2dmM2JneXcyYi90aHJlZV9kX3NlY3VyZS9sb29rdXAifSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImRpc3BsYXlOYW1lIjoiQWNtZSBXaWRnZXRzLCBMdGQuIChTYW5kYm94KSIsImNsaWVudElkIjpudWxsLCJwcml2YWN5VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3BwIiwidXNlckFncmVlbWVudFVybCI6Imh0dHA6Ly9leGFtcGxlLmNvbS90b3MiLCJiYXNlVXJsIjoiaHR0cHM6Ly9hc3NldHMuYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhc3NldHNVcmwiOiJodHRwczovL2NoZWNrb3V0LnBheXBhbC5jb20iLCJkaXJlY3RCYXNlVXJsIjpudWxsLCJhbGxvd0h0dHAiOnRydWUsImVudmlyb25tZW50Tm9OZXR3b3JrIjp0cnVlLCJlbnZpcm9ubWVudCI6Im9mZmxpbmUiLCJ1bnZldHRlZE1lcmNoYW50IjpmYWxzZSwiYnJhaW50cmVlQ2xpZW50SWQiOiJtYXN0ZXJjbGllbnQzIiwiYmlsbGluZ0FncmVlbWVudHNFbmFibGVkIjpmYWxzZSwibWVyY2hhbnRBY2NvdW50SWQiOiJhY21ld2lkZ2V0c2x0ZHNhbmRib3giLCJjdXJyZW5jeUlzb0NvZGUiOiJVU0QifSwiY29pbmJhc2VFbmFibGVkIjpmYWxzZSwibWVyY2hhbnRJZCI6IjM0OHBrOWNnZjNiZ3l3MmIiLCJ2ZW5tbyI6Im9mZiJ9";
+
+    braintree.setup(clientToken, "dropin", {
+      container: "payment-form"
+    });
+    </script>
+</body>
+</html>
